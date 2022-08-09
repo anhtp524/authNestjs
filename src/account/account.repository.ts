@@ -17,8 +17,12 @@ export class AccountRepository {
         return this.accountModel.find().exec()
     }
 
-    async findOne(_username: string): Promise<Account> {
+    async findOneByUsername(_username: string): Promise<Account> {
         return this.accountModel.findOne({username: _username}).lean()
+    }
+
+    async findOneById(id: string): Promise<Account> {
+        return this.accountModel.findById(id).exec()
     }
 
     async updateAccount(id: string, accountUpdate: CreatAccountDto): Promise<Account> {

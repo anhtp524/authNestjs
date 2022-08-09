@@ -20,8 +20,8 @@ export class AccountService {
         return this.accountRepository.findAll()
     }
 
-    async getAccountById(username: string)  {
-        return this.accountRepository.findOne(username)
+    async getAccountById(id: string)  {
+        return this.accountRepository.findOneById(id)
     }
 
     async updateAccount(id: string, accountUpdate: CreatAccountDto) {
@@ -30,13 +30,5 @@ export class AccountService {
 
     async deleteAccount(id) {
         return this.accountRepository.deleteAccount(id)
-    }
-
-    async testLogin(account: Account) {
-        let user = await this.accountRepository.findOne(account.username)
-        
-        let check = await bcrypt.compare(account.password,user.password)
-
-        return check
     }
 }

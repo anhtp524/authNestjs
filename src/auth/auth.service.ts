@@ -10,7 +10,7 @@ export class AuthService {
     constructor(private accountRepository: AccountRepository, private jwtservice: JwtService) {}
 
     async signin(acc: SignInDto) {
-        const account =  await this.accountRepository.findOne(acc.username)
+        const account =  await this.accountRepository.findOneByUsername(acc.username)
         if(!account){
             throw new UnauthorizedException("Account does not exist")
         }
