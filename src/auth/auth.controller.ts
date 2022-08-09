@@ -8,7 +8,7 @@ export class AuthController {
     constructor(private authService: AuthService) {}
 
     @Post('login')
-    signin(@Body() acc: SignInDto) {
+    async signin(@Body() acc: SignInDto) {
         return this.authService.signin(acc)
     }
 

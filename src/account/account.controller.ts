@@ -17,6 +17,13 @@ export class AccountController {
     getAll() {
         return this.accountService.getAllAccount()
     }
+    
+    // Để trên Get(Id) bởi vì id là param vào thuộc kiểu string nên để dưới sẽ lỗi
+    @UseGuards(AuthGuard('jwt'))
+    @Get('info')
+    getInfo(@Req() req: Request) {
+        return req.user
+    }
 
     @Get(':id')
     getById(@Param('id') id: string) {
@@ -31,12 +38,6 @@ export class AccountController {
     @Delete(':id')
     delete(@Param('id') id: string) {
         return this.accountService.deleteAccount(id)
-    }
-
-    @UseGuards(AuthGuard('jwt'))
-    @Get('info')
-    getInfo(@Req() req: Request) {
-        return req.user
     }
     
 }
