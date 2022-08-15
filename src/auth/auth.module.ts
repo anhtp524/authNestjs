@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategy/jwt.strategy';
 
 @Module({
-  imports: [MongooseModule.forFeature([{name: Account.name,schema: AccountSchema}]), JwtModule.register({secret: "secretKey", signOptions:{expiresIn: '5m'}})],
+  imports: [MongooseModule.forFeature([{name: Account.name,schema: AccountSchema}]), JwtModule.register({secret: "secretKey"})],
   controllers: [AuthController],
   providers: [AuthService, AccountRepository, JwtStrategy]
 })

@@ -3,11 +3,15 @@ import { AuthGuard } from '@nestjs/passport';
 import { AccountService } from './account.service';
 import { CreatAccountDto } from './dto/account.dto';
 import { Request } from 'express';
+import { Role } from './enum/role.enum';
+import { RolesGuard } from './guard/role.guard';
 
 
 @Controller('account')
+@UseGuards(AuthGuard('jwt'))
 export class AccountController {
     constructor(private readonly accountService: AccountService) {}
+
     @Post()
     createAccount(@Body() account: CreatAccountDto) {
         return this.accountService.creatAccount(account)
@@ -19,8 +23,8 @@ export class AccountController {
     }
     
     // Để trên Get(Id) bởi vì id là param vào thuộc kiểu string nên để dưới sẽ lỗi
-    @UseGuards(AuthGuard('jwt'))
     @Get('info')
+    @UseGuards(new RolesGuard(Role.admin))
     getInfo(@Req() req: Request) {
         return req.user
     }

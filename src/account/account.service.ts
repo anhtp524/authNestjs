@@ -2,9 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { AccountRepository } from './account.repository';
 import { CreatAccountDto } from './dto/account.dto';
 import * as bcrypt from 'bcrypt'
-import { Account } from './account.schema';
-
-
 
 @Injectable()
 export class AccountService {
@@ -21,6 +18,8 @@ export class AccountService {
     }
 
     async getAccountById(id: string)  {
+        let account = await this.accountRepository.findOneById(id)
+        
         return this.accountRepository.findOneById(id)
     }
 

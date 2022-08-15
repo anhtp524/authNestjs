@@ -4,6 +4,8 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  //Su dung Pipe Global (o cac file dto)
   app.useGlobalPipes(new ValidationPipe())
   await app.listen(3000);
 }

@@ -28,7 +28,7 @@ export class AuthService {
     async signToken(acc: SignInDto) {
         const payload = {sub: acc.username}
 
-        const token = await this.jwtservice.sign(payload)
+        const token = await this.jwtservice.sign(payload , {expiresIn : '5m'})
 
         return {
             access_token: token,
