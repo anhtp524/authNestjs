@@ -24,6 +24,7 @@ export class AccountService {
     }
 
     async updateAccount(id: string, accountUpdate: CreatAccountDto) {
+        accountUpdate.password = await bcrypt.hash(accountUpdate.password, 10)
         return this.accountRepository.updateAccount(id, accountUpdate)
     }
 
